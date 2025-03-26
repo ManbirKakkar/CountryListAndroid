@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "CountryListAndroid"
 include(":app")
- 
+include(":base")
