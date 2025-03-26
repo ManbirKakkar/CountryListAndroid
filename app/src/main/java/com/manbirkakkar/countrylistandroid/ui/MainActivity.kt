@@ -1,7 +1,6 @@
 package com.manbirkakkar.countrylistandroid.ui
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -10,15 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.manbirkakkar.base.BaseActivity
 import com.manbirkakkar.countrylistandroid.adapter.CountriesAdapter
 import com.manbirkakkar.countrylistandroid.databinding.ActivityMainBinding
+import com.manbirkakkar.countrylistandroid.util.ServiceLocator
 import com.manbirkakkar.network.model.Country
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
+    private lateinit var viewModel: MainViewModel
     private val adapter by lazy { CountriesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +24,7 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel = ServiceLocator.createMainViewModel(this)
         setupRecyclerView()
         observeViewModel()
     }

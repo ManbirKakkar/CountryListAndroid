@@ -12,7 +12,7 @@ class CountryRepositoryImpl(
 ) : CountryRepository {
     override suspend fun getCountries(): Result<List<Country>> {
         return try {
-            val response = countryService.getCountries() // Use injected service
+            val response = countryService.getCountries()
             Result.success(response)
         } catch (e: Exception) {
             Result.failure(e)
